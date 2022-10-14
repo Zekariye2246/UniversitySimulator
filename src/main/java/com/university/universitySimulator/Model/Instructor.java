@@ -1,5 +1,7 @@
 package com.university.universitySimulator.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -12,6 +14,7 @@ public class Instructor {
     private String department;
 
     @OneToMany(mappedBy = "instructor")
+    @JsonIgnore
     private Collection<Course> courses;
 
     public Instructor(String instructorName, String department) {

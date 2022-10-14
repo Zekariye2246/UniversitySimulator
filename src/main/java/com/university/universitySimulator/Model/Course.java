@@ -1,6 +1,9 @@
 package com.university.universitySimulator.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Course {
@@ -13,7 +16,11 @@ public class Course {
     private String semester;
 
     @ManyToOne
+
     private Instructor instructor;
+
+    @ManyToMany(mappedBy = "courses")
+    private Collection<Student> students;
 
     public Course(String courseName, int creditHours, int duration, String semester, Instructor instructor) {
         this.courseName = courseName;
@@ -24,6 +31,10 @@ public class Course {
     }
     public Course() {
 
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     public long getId() {
@@ -46,4 +57,11 @@ public class Course {
         return semester;
     }
 
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public Collection<Student> getStudents() {
+        return students;
+    }
 }

@@ -2,8 +2,10 @@ package com.university.universitySimulator;
 
 import com.university.universitySimulator.Model.Course;
 import com.university.universitySimulator.Model.Instructor;
+import com.university.universitySimulator.Model.Student;
 import com.university.universitySimulator.Repo.CourseRepository;
 import com.university.universitySimulator.Repo.InstructorRepository;
+import com.university.universitySimulator.Repo.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +13,14 @@ import org.springframework.stereotype.Component;
 public class Populator implements CommandLineRunner {
     private CourseRepository courseRepo;
     private InstructorRepository instructorRepo;
+    private StudentRepository studentRepo;
 
-    public Populator(CourseRepository courseRepo, InstructorRepository instructorRepo) {
+
+    public Populator(CourseRepository courseRepo, InstructorRepository instructorRepo, StudentRepository studentRepo) {
         this.courseRepo = courseRepo;
         this.instructorRepo =instructorRepo;
+        this.studentRepo = studentRepo;
+
     }
 
     @Override
@@ -36,7 +42,15 @@ public class Populator implements CommandLineRunner {
         Course course4 = new Course("Intro to Tomfoolery", 6, 120,"Spring 2023", instructor3);
         courseRepo.save(course4);
 
+        Student student1 = new Student("Will", "CSE", course1, course2);
+        studentRepo.save(student1);
+        Student student2 = new Student("Matthew", "CIS", course3, course4);
+        studentRepo.save(student2);
+        Student student3 = new Student("Zak", "ECE", course1, course2, course3, course4);
+        studentRepo.save(student3);
+
     }
+
 
 
 
